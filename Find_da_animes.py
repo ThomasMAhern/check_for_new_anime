@@ -11,14 +11,10 @@ async def animeplanet_ep_num(name_of_anime):
     '''given anime name, go to anime-planet and extract episode value'''
     print(f'Attempting to get: {name_of_anime}')
     page = await context.new_page()
-    await page.goto('https://www.anime-planet.com/')
-    await page.fill('#siteSearch-input', name_of_anime) # enter anime text in search field
+    await page.goto('https://myanimelist.net')
+    await page.fill('#topSearchText', name_of_anime) # enter anime text in search field
     await page.keyboard.press('Enter')
-    episodes = page.inner_html('#siteContainer > ul > li:nth-child(2) > a > div.statusArea') #the episode item
-    print(episodes())
-#     value = episodes.('value') # get the actual number value
-#     print(f'    Latest episode: {value}')
-#     return value
+    await page.click(name_of_anime)
 
 async def nyaa_mag_link(name_of_anime, episode_2_get):
     '''given anime name and episode number, click on magnet link to open in transmission'''
